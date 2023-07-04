@@ -1,7 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getMovieCredits } from 'Api';
 
-export const Cast = () => {
-  return <div>Strona domowa</div>;
+export const Cast = ({ movieId }) => {
+  const [cast, setCast] = useState([]);
+
+  useEffect(() => {
+    fetchMovieCredits();
+  }, []);
+
+  const fetchMovieCredits = async () => {
+    try {
+      const castData = await getMovieCredits(movieId);
+      setCast(castData);
+    } catch (error) {
+      console.error(
+        'Błąd podczas pobierania informacji o zespole aktorskim:',
+        error
+      );
+    }
+  };
+
+  return (
+    <div>
+      <h2>Cast</h2>
+      {cast.map(actor => (
+        <div key={actor.id}>
+          <p>{actor.name}</p>
+          <p>{actor.character}</p>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default Cast;

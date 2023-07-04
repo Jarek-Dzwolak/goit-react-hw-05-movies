@@ -1,0 +1,88 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.input_container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.input {
+  flex-grow: 1;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.button {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.movie_list {
+  list-style: none;
+  padding: 0;
+}
+
+.movie_item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.movie_item img {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.movie_title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  list-style: none;
+  text-decoration: none;
+}
+
+/* App.css */
+
+.container {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+/* Przykładowe style dla klas styles.movieLink oraz styles.link */
+
+.movieLink,
+.link {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.movieLink:hover,
+.link:hover {
+  color: #ff0000; /* Kolor podświetlenia po najechaniu myszką */
+}
+
+.movieLink img {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.movieLink h3 {
+  font-size: 18px;
+  margin: 0;
+}

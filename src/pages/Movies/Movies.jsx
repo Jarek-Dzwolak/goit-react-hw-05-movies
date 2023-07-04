@@ -1,34 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getMovieDetails } from 'Api';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Importuj komponent Link
+import { searchMovies } from 'Api';
+import styles from './Movies.module.css'; // Importuj plik CSS
 
 const Movies = () => {
-  const { movieId } = useParams();
-  const [movie, setMovie] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-  useEffect(() => {
-    fetchMovieDetails();
-  }, []);
-
-  const fetchMovieDetails = async () => {
+  const handleSearch = async () => {
     try {
-      const movieDetails = await getMovieDetails(movieId);
-      setMovie(movieDetails);
+      const results = await searchMovies(searchQuery);
+      setSearchResults(results);
     } catch (error) {
-      console.error('Błąd podczas pobierania informacji o filmie:', error);
+      console.error('Błąd podczas wyszukiwania filmów:', error);
     }
   };
 
-  if (!movie) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div>
-      <h1>{movie.title}</h1>
-      <p>{movie.overview}</p>
-      <p>Release Date: {movie.release_date}</p>
-      <p>Rating: {movie.vote_average}</p>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Wyszukiwarka filmów</h1>
+      <div className={styles.input_container}>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={event => setSearchQuery(event.target.value)}
+          className={styles.input}
+        />
+        <button onClick={handleSearch} className={styles.button}>
+          Szukaj
+        </button>
+      </div>
+      <ul className={styles.movie_list}>
+        {searchResults.map(movie => (
+          <li key={movie.id} className={styles.movie_item}>
+            <Link to={`/movies/${movie.id}`} className={styles.movie_link}>
+              <img
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+                className={styles.movie_image}
+              />
+              <div className={styles.movie_details}>
+                <h2 className={styles.movie_title}>{movie.title}</h2>
+                <p className={styles.movie_overview}>{movie.overview}</p>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
