@@ -4,6 +4,7 @@ import { getMovieDetails, getMovieCredits, getMovieReviews } from 'Api';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
 import styles from './MovieDetails.module.css';
+import { Link, Outlet } from 'react-router-dom';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -65,12 +66,12 @@ const MovieDetails = () => {
 
   return (
     <div className={styles.movieDetails}>
-      <img
-        className={styles.poster}
-        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-        alt={movie.title}
-      />
       <div className={styles.details}>
+        <img
+          className={styles.poster}
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={movie.title}
+        />
         <h1 className={styles.title}>{movie.title}</h1>
         <p>{movie.overview}</p>
         <p>Rating: {movie.vote_average}</p>
@@ -86,10 +87,11 @@ const MovieDetails = () => {
         )}
         {showReviews && reviews && (
           <div className={styles.reviewsContainer}>
-            <Reviews movieId={movieId} Reviews={cast} />
+            <Reviews movieId={movieId} Reviews={reviews} />
           </div>
         )}
       </div>
+      <Outlet />
     </div>
   );
 };

@@ -20,12 +20,16 @@ export const Reviews = ({ movieId }) => {
   return (
     <div>
       <h2>Reviews</h2>
-      {reviews.map(review => (
-        <div key={review.id}>
-          <p>{review.author}</p>
-          <p>{review.content}</p>
-        </div>
-      ))}
+      {reviews.length > 0 ? (
+        reviews.map(review => (
+          <div key={review.id}>
+            <p>{review.author}</p>
+            <p>{review.content}</p>
+          </div>
+        ))
+      ) : (
+        <p>No reviews available</p>
+      )}
     </div>
   );
 };

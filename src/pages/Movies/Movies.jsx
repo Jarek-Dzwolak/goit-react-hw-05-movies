@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Importuj komponent Link
+import { Link, useNavigate } from 'react-router-dom';
 import { searchMovies } from 'Api';
-import styles from './Movies.module.css'; // Importuj plik CSS
+import styles from './Movies.module.css';
 
 const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
     try {
       const results = await searchMovies(searchQuery);
       setSearchResults(results);
+      navigate(`?query=${searchQuery}`);
     } catch (error) {
       console.error('Błąd podczas wyszukiwania filmów:', error);
     }
@@ -33,7 +35,13 @@ const Movies = () => {
       <ul className={styles.movie_list}>
         {searchResults.map(movie => (
           <li key={movie.id} className={styles.movie_item}>
-            <Link to={`/movies/${movie.id}`} className={styles.movie_link}>
+            <Link
+              to={{
+                pathname: `/movies/${movie.id}`,
+                search: `?query=${searchQuery}`,
+              }}
+              className={styles.movie_link}
+            >
               <img
                 src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                 alt={movie.title}

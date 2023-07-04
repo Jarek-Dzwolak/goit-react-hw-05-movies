@@ -6,18 +6,15 @@ import MovieDetails from '../pages/MovieDetails/MovieDetails';
 import Cast from './Cast/Cast';
 import Reviews from './Reviews/Reviews';
 import css from './App.module.css';
+import { StyledLink } from './App.styled';
 
 export const App = () => {
   return (
     <div>
       <header className={css.header}>
         <nav>
-          <Link to="/" className={css.link}>
-            Home
-          </Link>
-          <Link to="/movies" className={css.link}>
-            Movies
-          </Link>
+          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="/movies">Movies</StyledLink>
         </nav>
       </header>
 
