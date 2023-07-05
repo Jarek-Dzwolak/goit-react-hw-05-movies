@@ -1,5 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
 import Home from '../pages/Home/Home';
 import Movies from '../pages/Movies/Movies';
 import MovieDetails from '../pages/MovieDetails/MovieDetails';
@@ -24,6 +30,7 @@ export const App = () => {
         <Route path="/movies/:movieId" element={<MovieDetails />}>
           <Route path="cast" element={<Cast />} />
           <Route path="reviews" element={<Reviews />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
     </div>

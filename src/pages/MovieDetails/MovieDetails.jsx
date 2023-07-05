@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getMovieDetails, getMovieCredits, getMovieReviews } from 'Api';
 import Cast from 'components/Cast/Cast';
 import Reviews from 'components/Reviews/Reviews';
 import styles from './MovieDetails.module.css';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
   const [showCast, setShowCast] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
@@ -64,9 +66,16 @@ const MovieDetails = () => {
     return <div>Loading...</div>;
   }
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className={styles.movieDetails}>
       <div className={styles.details}>
+        <div className={styles.goBackContainer}>
+          <button onClick={goBack}>Go Back</button>
+        </div>
         <img
           className={styles.poster}
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
