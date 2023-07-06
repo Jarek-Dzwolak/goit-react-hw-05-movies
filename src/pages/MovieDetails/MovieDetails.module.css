@@ -25,13 +25,9 @@
   margin-top: 20px;
 }
 
-.buttonContainer button {
-  margin-right: 10px;
-  padding: 10px 20px;
-  background-color: #eaeaea;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.buttonContainer {
+  display: flex;
+  gap: 10px;
 }
 
 .castContainer {
@@ -70,4 +66,14 @@
 
 .reviewsContainer li .reviewContent {
   margin-top: 5px;
+}
+.link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f2f2f2;
+  color: #333;
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
